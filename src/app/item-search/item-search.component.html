@@ -2,7 +2,7 @@
   <div [style]="'width: 50em'">
     <mat-form-field appearance="outline" fxFlexFill>
       <mat-label>Outline form field</mat-label>
-      <input matInput placeholder="Placeholder" />
+      <input matInput placeholder="Placeholder" [formControl]="searchValue" />
       <mat-hint>Hint</mat-hint>
     </mat-form-field>
   </div>
