@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { ItemSearchService } from './shared/item-search.service';
 
 @Component({
   selector: 'app-item-search',
   templateUrl: './item-search.component.html',
-  styleUrls: ['./item-search.component.css']
 })
 export class ItemSearchComponent implements OnInit {
-  searchValue= new FormControl('some value');
+  searchValue = new FormControl('gundam seed');
 
-  constructor() { 
-  }
+  items: any;
+
+  constructor(private itemSearchService: ItemSearchService) {}
 
   ngOnInit(): void {
-    this.searchValue.valueChanges.subscribe(console.log)
+    // this.searchValue.valueChanges.subscribe(console.log);
   }
 
+  search() {
+    console.log('searching:' + this.searchValue.value);
+    this.items = this.itemSearchService.getWikipedia(this.searchValue.value);
+    // this.items.subscribe(console.log);
+  }
 }

@@ -2,8 +2,15 @@
   <div [style]="'width: 50em'">
     <mat-form-field appearance="outline" fxFlexFill>
       <mat-label>Outline form field</mat-label>
-      <input matInput placeholder="Placeholder" [formControl]="searchValue" />
+      <input
+        matInput
+        placeholder="Placeholder"
+        [formControl]="searchValue"
+        (keydown.enter)="search()"
+        (keydown.tab)="search()"
+      />
       <mat-hint>Hint</mat-hint>
     </mat-form-field>
   </div>
 </div>
+<div *ngFor="let item of items | async">{{ item | json }}</div>
