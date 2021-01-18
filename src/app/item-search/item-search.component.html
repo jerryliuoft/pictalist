@@ -1,5 +1,5 @@
 <div fxLayoutAlign="space-evenly">
-  <div [style]="'width: 50em'">
+  <div class="searchBar">
     <mat-form-field appearance="outline" fxFlexFill>
       <mat-label>Outline form field</mat-label>
       <input
@@ -13,4 +13,14 @@
     </mat-form-field>
   </div>
 </div>
-<div *ngFor="let item of items | async">{{ item | json }}</div>
+
+<div *ngIf="!items && searchValue.value" fxLayoutAlign="space-evenly">
+  <mat-progress-bar mode="indeterminate" class="loadingBar"></mat-progress-bar>
+</div>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1em grid">
+  <div *ngFor="let item of items | async" class="highlightFirstCard">
+    <mat-card fxFlex="1 0 10em" class="card">
+      <img src="{{ item.thumbnailImage }}" />
+    </mat-card>
+  </div>
+</div>

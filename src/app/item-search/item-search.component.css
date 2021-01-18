@@ -1,0 +1,24 @@
+.searchBar {
+  width: 50em;
+}
+
+.card {
+  width: 10em;
+  height: 10em;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.highlightFirstCard:first-child > .card {
+  color: purple;
+  border: 2px solid;
+  border-radius: 10px;
+}
+
+.loadingBar {
+  margin-top: 3em;
+  width: 40em;
+}

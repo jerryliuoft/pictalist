@@ -5,6 +5,7 @@ import { ItemSearchService } from './shared/item-search.service';
 @Component({
   selector: 'app-item-search',
   templateUrl: './item-search.component.html',
+  styleUrls: ['./item-search.component.css']
 })
 export class ItemSearchComponent implements OnInit {
   searchValue = new FormControl('gundam seed');

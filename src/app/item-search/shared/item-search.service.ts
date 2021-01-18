@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, filter } from 'rxjs/operators';
+import { response } from 'express';
 
 const WIKIPEDIA = {
   // Documentation is here https://www.mediawiki.org/wiki/API:Search#API_documentation
@@ -46,7 +47,7 @@ export class ItemSearchService {
     return this.http.get(WIKIPEDIA.url, { params }).pipe(
       // tap(console.log),
       map((response: any) => {
-        return response?.query?.pages.map((result: any) => ({
+        const cards = response?.query?.pages.map((result: any) => ({
           id: result.pageid,
           name: result.title,
           thumbnailImage: result?.thumbnail?.source,
@@ -55,6 +56,8 @@ export class ItemSearchService {
           url: result.fullurl,
           source: 'wikipedia',
         }));
+
+        return cards.filter((card: any) => card.thumbnailImage || card.highResImage)
       })
     );
   }
