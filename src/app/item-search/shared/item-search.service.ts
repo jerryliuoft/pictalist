@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap, map, filter } from 'rxjs/operators';
 import { response } from 'express';
+import {Item} from '../../types'
+import { Observable } from 'rxjs';
 
 const WIKIPEDIA = {
   // Documentation is here https://www.mediawiki.org/wiki/API:Search#API_documentation
@@ -38,7 +40,7 @@ export class ItemSearchService {
     return this.http.get(this.URL);
   }
 
-  getWikipedia(val: string) {
+  getWikipedia(val: string): Observable<Item[]> {
     // fromObject is not on angular doc but in the source code https://github.com/angular/angular/blob/master/packages/common/http/src/params.ts#L144
     const params = new HttpParams({ fromObject: WIKIPEDIA.params }).set(
       'gsrsearch',
