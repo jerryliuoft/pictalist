@@ -30,11 +30,25 @@
   </div>
 </div>
 
-<div *ngIf="newCollection.length > 0" fxLayoutAlign="space-evenly">
+<div
+  *ngIf="newCollection.length > 0"
+  fxLayoutAlign="space-evenly"
+  [style]="'margin-top: 3em'"
+>
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let item of newCollection" cdkDrag>
-      <img src="{{ item.thumbnailImage }}" />
-      <h3>{{ item.name }}</h3>
+      <img src="{{ item.thumbnailImage }}" [style]="'margin-left: 0.5em'" />
+      <div
+        class="item-content"
+        fxFlex="grow"
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+      >
+        <p>{{ item.name }}</p>
+        <button mat-mini-fab color="warn" (click)="removeFromCollection(item)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>
