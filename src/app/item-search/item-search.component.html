@@ -30,11 +30,10 @@
   </div>
 </div>
 
-<div
-  *ngIf="newCollection.length > 0"
-  fxLayoutAlign="space-evenly"
-  [style]="'margin-top: 3em'"
->
+<div *ngIf="newCollection.length > 0" class="collection">
+  <div class="actions">
+    <button mat-raised-button color="primary">Save</button>
+  </div>
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let item of newCollection" cdkDrag>
       <img src="{{ item.thumbnailImage }}" [style]="'margin-left: 0.5em'" />

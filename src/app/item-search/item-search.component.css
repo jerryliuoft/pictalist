@@ -23,6 +23,16 @@ img {
   width: 40em;
 }
 
+.collection {
+  margin-top: 3em;
+}
+.actions {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: auto;
+  margin-bottom: 1em;
+  max-width: 50em;
+}
 /* below are all drag and drop styles */
 .example-list {
   width: 50em;
@@ -33,6 +43,8 @@ img {
   background: white;
   border-radius: 10px;
   overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
 }
 .example-box {
   padding: 0.4em 0.2em;

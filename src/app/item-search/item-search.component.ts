@@ -31,6 +31,15 @@ export class ItemSearchComponent implements OnInit {
         url: 'https://picsum.photos/200',
         source: 'test',
       },
+      {
+        name: 'test 2',
+        id: 1,
+        thumbnailImage: 'https://picsum.photos/200',
+        highResImage: 'https://picsum.photos/200',
+        description: 'SOME DESCRIPTION',
+        url: 'https://picsum.photos/200',
+        source: 'test',
+      },
     ];
   }
 
@@ -40,6 +49,7 @@ export class ItemSearchComponent implements OnInit {
 
   search() {
     // If search already has result then append the first item
+    // TODO might want it to be selectable on pc using arrows
     if (this.results.length > 0) {
       this.addToCollection(this.results[0]);
     } else {
@@ -67,5 +77,9 @@ export class ItemSearchComponent implements OnInit {
 
   removeFromCollection(item: Item) {
     this.newCollection = this.newCollection.filter((cur) => cur !== item);
+  }
+
+  saveCollection() {
+    this.newCollection = [];
   }
 }
