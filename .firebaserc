@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pictalist": {
+      "hosting": {
+        "pictalist": [
+          "pictalist"
+        ]
+      }
+    }
+  }
+}

@@ -10,7 +10,8 @@ import { ItemSearchComponent } from './item-search/item-search.component';
 import { HomeComponent } from './home/home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    NgxAuthFirebaseUIModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
