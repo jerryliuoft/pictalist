@@ -1,8 +1,9 @@
 <div class="root">
   <mat-toolbar color="primary" [class.mat-elevation-z4]="true">
-    <h1>Pictalist</h1>
+    <a mat-button routerLink="/" class="title">Pictalist</a>
+    <span class="spacer"></span>
+    <a mat-raised-button routerLink="/login">Login</a>
   </mat-toolbar>
-  <ngx-auth-firebaseui appearance="outline"></ngx-auth-firebaseui>
   <div class="content">
     <router-outlet></router-outlet>
   </div>
