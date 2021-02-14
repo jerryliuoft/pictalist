@@ -13,7 +13,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./item-search.component.css'],
 })
 export class ItemSearchComponent implements OnInit {
-  searchValue = new FormControl('gundam seed');
+  searchValue = new FormControl('');
 
   searchResult: Observable<Item[]> | undefined;
   results: Item[]; // This contains searchResult retrieved value.
@@ -25,26 +25,27 @@ export class ItemSearchComponent implements OnInit {
   ) {
     this.newCollection = [];
     this.results = [];
-    this.newCollection = [
-      {
-        name: 'test',
-        id: 1,
-        thumbnailImage: 'https://picsum.photos/200',
-        highResImage: 'https://picsum.photos/200',
-        description: 'SOME DESCRIPTION',
-        url: 'https://picsum.photos/200',
-        source: 'test',
-      },
-      {
-        name: 'test 2',
-        id: 1,
-        thumbnailImage: 'https://picsum.photos/200',
-        highResImage: 'https://picsum.photos/200',
-        description: 'SOME DESCRIPTION',
-        url: 'https://picsum.photos/200',
-        source: 'test',
-      },
-    ];
+    // Testing initial collection
+    // this.newCollection = [
+    //   {
+    //     name: 'test',
+    //     id: 1,
+    //     thumbnailImage: 'https://picsum.photos/200',
+    //     highResImage: 'https://picsum.photos/200',
+    //     description: 'SOME DESCRIPTION',
+    //     url: 'https://picsum.photos/200',
+    //     source: 'test',
+    //   },
+    //   {
+    //     name: 'test 2',
+    //     id: 1,
+    //     thumbnailImage: 'https://picsum.photos/200',
+    //     highResImage: 'https://picsum.photos/200',
+    //     description: 'SOME DESCRIPTION',
+    //     url: 'https://picsum.photos/200',
+    //     source: 'test',
+    //   },
+    // ];
   }
 
   ngOnInit(): void {

@@ -1,15 +1,18 @@
 <div fxLayoutAlign="space-evenly">
   <div class="searchBar">
     <mat-form-field appearance="outline" fxFlexFill>
-      <mat-label>Outline form field</mat-label>
+      <mat-label>New Item</mat-label>
       <input
         matInput
-        placeholder="Placeholder"
+        placeholder="Type in here to add item to your list, press tab or enter to search"
         [formControl]="searchValue"
         (keydown.enter)="search()"
         (keydown.tab)="search()"
       />
-      <mat-hint>Hint</mat-hint>
+      <mat-hint
+        >Try website link, anime, movie, video game name or your grocery items
+        like milk</mat-hint
+      >
     </mat-form-field>
   </div>
 </div>
