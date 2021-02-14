@@ -1,19 +1,23 @@
-<div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutGap="2em grid"
-  fxLayoutGap.xs="1em"
->
+<div class="center">
+  <h1>LIST TITLE</h1>
   <div
-    *ngFor="let item of items"
-    fxLayout="column"
-    fxLayout.xs="row"
-    fxFlex="25%"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutGap="2em grid"
+    fxLayoutGap.xs="1em"
+    class="grid-container"
   >
-    <img class="thumbnail" src="https://picsum.photos/200/300" />
-    <div>
-      <h3>Title</h3>
-      <p>Link</p>
+    <div
+      *ngFor="let item of items"
+      fxLayout="column"
+      fxLayout.xs="row"
+      fxFlex="25%"
+    >
+      <img class="thumbnail" src="https://picsum.photos/200/300" />
+      <div>
+        <h3>Title</h3>
+        <p>Link</p>
+      </div>
     </div>
   </div>
 </div>

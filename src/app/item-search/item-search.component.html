@@ -1,5 +1,5 @@
 <div fxLayoutAlign="space-evenly">
-  <div class="searchBar">
+  <div class="search-bar">
     <mat-form-field appearance="outline" fxFlexFill>
       <mat-label>New Item</mat-label>
       <input
@@ -31,7 +31,6 @@
     </mat-card>
   </div>
 </div>
-
 <div *ngIf="newCollection.length > 0" class="collection">
   <div class="actions">
     <button mat-raised-button color="primary" (click)="saveCollection()">

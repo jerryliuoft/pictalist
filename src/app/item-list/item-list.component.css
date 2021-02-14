@@ -4,3 +4,8 @@
   width: auto;
   height: auto;
 }
+.center {
+  padding-top: 10vh;
+  max-width: 80em;
+  margin: auto;
+}
