@@ -32,7 +32,7 @@
     "@angular/router": "~11.0.5",
     "@nguniversal/express-engine": "^11.0.1",
     "express": "^4.15.2",
-    "firebase": "^8.2.4",
+    "firebase": "^8.2.7",
     "ngx-auth-firebaseui": "^5.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

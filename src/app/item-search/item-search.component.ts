@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ItemSearchService } from './shared/item-search.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Item } from '../types';
+import { Item, List } from '../types';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-item-search',
@@ -18,7 +19,10 @@ export class ItemSearchComponent implements OnInit {
   results: Item[]; // This contains searchResult retrieved value.
   newCollection: Item[];
 
-  constructor(private itemSearchService: ItemSearchService) {
+  constructor(
+    private itemSearchService: ItemSearchService,
+    private store: AngularFirestore
+  ) {
     this.newCollection = [];
     this.results = [];
     this.newCollection = [
@@ -79,7 +83,16 @@ export class ItemSearchComponent implements OnInit {
     this.newCollection = this.newCollection.filter((cur) => cur !== item);
   }
 
+  // this will upload to firebase
   saveCollection() {
+    const newList: List = {
+      users: [{ id: '1', name: 'tmp', profilePicture: '' }],
+      collection: this.newCollection,
+      creationDate: '',
+      updateDate: '',
+      visibility: '',
+    };
+    this.store.collection('list').add(newList);
     this.newCollection = [];
   }
 }
