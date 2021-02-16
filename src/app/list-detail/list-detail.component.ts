@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Item } from '../types';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.css'],
+  selector: 'app-list-detail',
+  templateUrl: './list-detail.component.html',
+  styleUrls: ['./list-detail.component.css'],
 })
-export class ItemListComponent implements OnInit {
+export class ListDetailComponent implements OnInit {
   public isMobile: boolean = false;
 
   items: any;
