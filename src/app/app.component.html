@@ -1,10 +1,28 @@
-<div>
-  <mat-toolbar color="primary" [class.mat-elevation-z4]="true">
-    <a mat-button routerLink="/" class="title">Pictalist</a>
-    <span class="spacer"></span>
-    <a mat-raised-button routerLink="/login">Login</a>
-  </mat-toolbar>
+<nav mat-tab-nav-bar backgroundColor="primary" [class.mat-elevation-z4]="true">
   <div>
-    <router-outlet></router-outlet>
+    <p class="title">Pictalist</p>
   </div>
-</div>
+  <a
+    mat-tab-link
+    routerLink="/list"
+    routerLinkActive
+    #rlaList="routerLinkActive"
+    [active]="rlaList.isActive"
+    >Browse</a
+  >
+  <a
+    mat-tab-link
+    routerLink="/new"
+    routerLinkActive
+    #rlaNew="routerLinkActive"
+    [active]="rlaNew.isActive"
+    >New</a
+  >
+  <span class="spacer"></span>
+  <div>
+    <a class="login" mat-raised-button routerLink="/login">Login</a>
+  </div>
+</nav>
+<main [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</main>

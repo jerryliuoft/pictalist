@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatCardModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatTabsModule,
     DragDropModule,
   ],
 })

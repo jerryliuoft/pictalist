@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { ItemSearchComponent } from './item-search/item-search.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'list', component: ItemListComponent },
+  { path: 'list', component: ItemListComponent, data: { animation: 'isLeft' } },
+  {
+    path: 'new',
+    component: ItemSearchComponent,
+    data: { animation: 'isRight' },
+  },
 ];
 
 @NgModule({
@@ -16,6 +22,6 @@ const routes: Routes = [
       initialNavigation: 'enabled',
     }),
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, BrowserAnimationsModule],
 })
 export class AppRoutingModule {}
