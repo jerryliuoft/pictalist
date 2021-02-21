@@ -34,10 +34,15 @@ img {
 }
 .actions {
   display: flex;
-  flex-direction: row-reverse;
   margin: auto;
   margin-bottom: 1em;
-  max-width: 50em;
+}
+.save-button {
+  margin: 0.6em;
+}
+
+.title-input {
+  width: 50em;
 }
 /* below are all drag and drop styles */
 .example-list {

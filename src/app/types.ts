@@ -15,6 +15,7 @@ export interface User {
 }
 
 export interface List {
+  title: string;
   users: User[];
   collection: Item[];
   creationDate: string;

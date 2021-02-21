@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ItemSearchService } from './shared/item-search.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Item, List } from '../types';
@@ -14,6 +14,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class ItemSearchComponent implements OnInit {
   searchValue = new FormControl('');
+  collectionTitle = new FormControl('', Validators.required);
 
   searchResult: Observable<Item[]> | undefined;
   results: Item[]; // This contains searchResult retrieved value.
@@ -26,31 +27,29 @@ export class ItemSearchComponent implements OnInit {
     this.newCollection = [];
     this.results = [];
     // Testing initial collection
-    // this.newCollection = [
-    //   {
-    //     name: 'test',
-    //     id: 1,
-    //     thumbnailImage: 'https://picsum.photos/200',
-    //     highResImage: 'https://picsum.photos/200',
-    //     description: 'SOME DESCRIPTION',
-    //     url: 'https://picsum.photos/200',
-    //     source: 'test',
-    //   },
-    //   {
-    //     name: 'test 2',
-    //     id: 1,
-    //     thumbnailImage: 'https://picsum.photos/200',
-    //     highResImage: 'https://picsum.photos/200',
-    //     description: 'SOME DESCRIPTION',
-    //     url: 'https://picsum.photos/200',
-    //     source: 'test',
-    //   },
-    // ];
+    this.newCollection = [
+      {
+        name: 'test',
+        id: 1,
+        thumbnailImage: 'https://picsum.photos/200',
+        highResImage: 'https://picsum.photos/200',
+        description: 'SOME DESCRIPTION',
+        url: 'https://picsum.photos/200',
+        source: 'test',
+      },
+      {
+        name: 'test 2',
+        id: 1,
+        thumbnailImage: 'https://picsum.photos/200',
+        highResImage: 'https://picsum.photos/200',
+        description: 'SOME DESCRIPTION',
+        url: 'https://picsum.photos/200',
+        source: 'test',
+      },
+    ];
   }
 
-  ngOnInit(): void {
-    // this.searchValue.valueChanges.subscribe(console.log);
-  }
+  ngOnInit(): void {}
 
   search() {
     // If search already has result then append the first item
@@ -87,6 +86,7 @@ export class ItemSearchComponent implements OnInit {
   // this will upload to firebase
   saveCollection() {
     const newList: List = {
+      title: this.collectionTitle.value,
       users: [{ id: '1', name: 'tmp', profilePicture: '' }],
       collection: this.newCollection,
       creationDate: '',

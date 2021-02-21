@@ -2,18 +2,18 @@
   <div fxLayoutAlign="space-evenly">
     <div class="search-bar">
       <mat-form-field appearance="outline" fxFlexFill>
-        <mat-label>New Item</mat-label>
+        <mat-label>Type here to add </mat-label>
         <input
           matInput
-          placeholder="Type in here to add item to your list, press tab or enter to search"
+          placeholder="press tab or enter to search"
           [formControl]="searchValue"
           (keydown.enter)="search()"
           (keydown.tab)="search()"
         />
         <mat-hint
           >Try website link, anime, movie, video game name or your grocery items
-          like milk</mat-hint
-        >
+          like milk
+        </mat-hint>
       </mat-form-field>
     </div>
   </div>
@@ -37,9 +37,22 @@
   </div>
   <div *ngIf="newCollection.length > 0" class="collection">
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="saveCollection()">
-        Save
-      </button>
+      <div class="title-input">
+        <mat-form-field appearance="outline" fxFlexFill>
+          <mat-label>Title</mat-label>
+          <input matInput [formControl]="collectionTitle" required />
+        </mat-form-field>
+      </div>
+      <div class="save-button">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="saveCollection()"
+          [disabled]="collectionTitle.errors?.required"
+        >
+          Save
+        </button>
+      </div>
     </div>
     <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of newCollection" cdkDrag>
