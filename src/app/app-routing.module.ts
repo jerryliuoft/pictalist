@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollectionListComponent } from './collection-list/collection-list.component';
-import { ListDetailComponent } from './list-detail/list-detail.component';
+import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
 
 // Animation use isLeft for swiping to left and right for the other way
 const routes: Routes = [
@@ -16,8 +16,9 @@ const routes: Routes = [
     data: { animation: 'isLeft' },
   },
   {
-    path: 'list',
-    component: ListDetailComponent,
+    path: 'list/:id',
+    component: CollectionDetailComponent,
+    data: { animation: 'isRight' },
   },
   {
     path: 'new',

@@ -1,5 +1,5 @@
-<div class="center">
-  <h1>LIST TITLE</h1>
+<div class="center" *ngIf="list$ | async as list">
+  <h1>{{ list.title }}</h1>
   <div
     fxLayout="row wrap"
     fxLayout.xs="column"
@@ -8,15 +8,15 @@
     class="grid-container"
   >
     <div
-      *ngFor="let item of items"
+      *ngFor="let item of list.collection"
       fxLayout="column"
       fxLayout.xs="row"
       fxFlex="25%"
     >
-      <img class="thumbnail" src="https://picsum.photos/200/300" />
+      <img class="thumbnail" src="{{ item.thumbnailImage }}" />
       <div>
-        <h3>Title</h3>
-        <p>Link</p>
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.description }}</p>
       </div>
     </div>
   </div>
