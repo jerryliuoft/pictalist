@@ -21,6 +21,10 @@ const routes: Routes = [
     data: { animation: 'isRight' },
   },
   {
+    path: 'edit/:id',
+    component: ItemSearchComponent,
+  },
+  {
     path: 'new',
     component: ItemSearchComponent,
     data: { animation: 'isRight' },

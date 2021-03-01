@@ -15,10 +15,11 @@ export interface User {
 }
 
 export interface List {
+  id?: string;
   title: string;
   users: User[];
   collection: Item[];
-  creationDate: string;
-  updateDate: string;
+  creationDate: Date;
+  updateDate: Date;
   visibility: string;
 }

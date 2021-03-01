@@ -1,5 +1,11 @@
 <div class="center" *ngIf="list$ | async as list">
   <h1>{{ list.title }}</h1>
+
+  <div class="edit-button">
+    <button mat-raised-button color="primary" [routerLink]="['/edit', list.id]">
+      Edit
+    </button>
+  </div>
   <div
     fxLayout="row wrap"
     fxLayout.xs="column"

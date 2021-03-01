@@ -4,8 +4,12 @@ import { ItemSearchService } from './shared/item-search.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Item, List } from '../types';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { switchMap, tap } from 'rxjs/operators';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-item-search',
@@ -19,34 +23,39 @@ export class ItemSearchComponent implements OnInit {
   searchResult: Observable<Item[]> | undefined;
   results: Item[]; // This contains searchResult retrieved value.
   newCollection: Item[];
+  list$: Observable<List | undefined>;
+  list: List | undefined;
+  private listDoc: AngularFirestoreDocument<List> | undefined;
 
   constructor(
     private itemSearchService: ItemSearchService,
-    private store: AngularFirestore
+    private store: AngularFirestore,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.newCollection = [];
     this.results = [];
-    // Testing initial collection
-    this.newCollection = [
-      {
-        name: 'test',
-        id: 1,
-        thumbnailImage: 'https://picsum.photos/200',
-        highResImage: 'https://picsum.photos/200',
-        description: 'SOME DESCRIPTION',
-        url: 'https://picsum.photos/200',
-        source: 'test',
-      },
-      {
-        name: 'test 2',
-        id: 1,
-        thumbnailImage: 'https://picsum.photos/200',
-        highResImage: 'https://picsum.photos/200',
-        description: 'SOME DESCRIPTION',
-        url: 'https://picsum.photos/200',
-        source: 'test',
-      },
-    ];
+
+    // Populate all data if this is editing an existing list
+    this.list$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.listDoc = store.doc<List>('list/' + params.get('id'));
+        return this.listDoc.valueChanges({ idField: 'id' });
+      }),
+      tap((list) => {
+        if (list && list.id !== 'null') {
+          // id always gets populated because of idField from above
+          console.log('TEST TEST');
+          console.log(list);
+          this.list = list;
+          this.newCollection = list.collection;
+          this.collectionTitle = new FormControl(
+            list.title,
+            Validators.required
+          );
+        }
+      })
+    );
   }
 
   ngOnInit(): void {}
@@ -85,15 +94,29 @@ export class ItemSearchComponent implements OnInit {
 
   // this will upload to firebase
   saveCollection() {
-    const newList: List = {
-      title: this.collectionTitle.value,
-      users: [{ id: '1', name: 'tmp', profilePicture: '' }],
-      collection: this.newCollection,
-      creationDate: '',
-      updateDate: '',
-      visibility: '',
-    };
-    this.store.collection('list').add(newList);
+    if (this.listDoc && this.list) {
+      this.listDoc.update({
+        title: this.collectionTitle.value,
+        collection: this.newCollection,
+        updateDate: new Date(),
+      });
+      this.router.navigate(['/list', this.list.id]);
+    } else {
+      const newList: List = {
+        title: this.collectionTitle.value,
+        users: [{ id: '1', name: 'tmp', profilePicture: '' }],
+        collection: this.newCollection,
+        creationDate: new Date(),
+        updateDate: new Date(),
+        visibility: '',
+      };
+      this.store
+        .collection('list')
+        .add(newList)
+        .then((docRef) => {
+          this.router.navigate(['/list', docRef.id]);
+        });
+    }
     this.newCollection = [];
   }
 }

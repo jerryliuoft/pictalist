@@ -15,11 +15,11 @@ export class CollectionDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private store: AngularFirestore) {
     this.list$ = this.route.paramMap.pipe(
-      tap(console.log),
       switchMap((params: ParamMap) =>
-        store.doc<List>('list/' + params.get('id')).valueChanges()
-      ),
-      tap(console.log)
+        store
+          .doc<List>('list/' + params.get('id'))
+          .valueChanges({ idField: 'id' })
+      )
     );
   }
 
