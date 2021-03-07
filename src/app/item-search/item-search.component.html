@@ -19,7 +19,7 @@
     </div>
   </div>
   <!-- TODO look into if this is called twice -->
-  <div *ngIf="!searchResult && searchValue.value" fxLayoutAlign="space-evenly">
+  <div *ngIf="searching$ | async" fxLayoutAlign="space-evenly">
     <mat-progress-bar
       mode="indeterminate"
       class="loadingBar"

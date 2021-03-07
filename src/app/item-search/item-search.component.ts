@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { ItemSearchService } from './shared/item-search.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Item, List, User } from '../types';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import {
   AngularFirestore,
@@ -27,6 +27,7 @@ export class ItemSearchComponent implements OnInit {
   list$: Observable<List | undefined>;
   list: List | undefined;
   private listDoc: AngularFirestoreDocument<List> | undefined;
+  searching$: BehaviorSubject<any>; // used to diaply the loading bar
 
   constructor(
     private itemSearchService: ItemSearchService,
@@ -35,9 +36,9 @@ export class ItemSearchComponent implements OnInit {
     private router: Router,
     private user: AuthService
   ) {
+    this.searching$ = new BehaviorSubject(false);
     this.newCollection = [];
     this.results = [];
-
     // Populate all data if this is editing an existing list
     this.list$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
@@ -58,7 +59,15 @@ export class ItemSearchComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchValue.valueChanges.subscribe((val) => {
+      // Clear existing result if there are any because user has changed the input
+      // TODO: maybe don't use the result anymore and just have searchResult
+      // because result is just for the feature where I can add without using mouse
+      this.searchResult = undefined;
+      this.results = [];
+    });
+  }
 
   search() {
     // If search already has result then append the first item
@@ -66,9 +75,15 @@ export class ItemSearchComponent implements OnInit {
     if (this.results.length > 0) {
       this.addToCollection(this.results[0]);
     } else {
+      this.searching$.next(true);
       this.searchResult = this.itemSearchService
         .getWikipedia(this.searchValue.value)
-        .pipe(tap((result) => (this.results = result)));
+        .pipe(
+          tap((result) => {
+            this.results = result;
+            this.searching$.next(false);
+          })
+        );
     }
   }
 
