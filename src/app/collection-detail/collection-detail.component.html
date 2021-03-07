@@ -1,4 +1,4 @@
-<div class="center" *ngIf="list$ | async as list">
+<app-page-content *ngIf="list$ | async as list">
   <h1>{{ list.title }}</h1>
 
   <div class="edit-button">
@@ -26,4 +26,4 @@
       </div>
     </div>
   </div>
-</div>
+</app-page-content>

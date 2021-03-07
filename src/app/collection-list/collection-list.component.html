@@ -1,4 +1,4 @@
-<div class="content">
+<app-page-content>
   <div
     *ngIf="lists$ | async; let lists; else: loading"
     fxLayout="column"
@@ -24,4 +24,4 @@
     </div>
   </div>
   <ng-template #loading>Loading&hellip;</ng-template>
-</div>
+</app-page-content>

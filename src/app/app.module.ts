@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { LoginComponent } from './login/login.component';
 import { CollectionListComponent } from './collection-list/collection-list.component';
 import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
+import { PageContentComponent } from './page-content/page-content.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CollectionDetailComponent } from './collection-detail/collection-detail
     LoginComponent,
     CollectionListComponent,
     CollectionDetailComponent,
+    PageContentComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

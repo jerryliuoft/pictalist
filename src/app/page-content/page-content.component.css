@@ -1,0 +1,12 @@
+.root {
+  height: 92vh;
+  padding-top: 3em;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: white;
+  border-radius: 1em;
+}
+.content {
+  max-width: 50em;
+  margin: auto;
+}
