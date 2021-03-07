@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ItemSearchService } from './shared/item-search.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Item, List } from '../types';
+import { Item, List, User } from '../types';
 import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import {
@@ -10,6 +10,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-item-search',
@@ -31,7 +32,8 @@ export class ItemSearchComponent implements OnInit {
     private itemSearchService: ItemSearchService,
     private store: AngularFirestore,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private user: AuthService
   ) {
     this.newCollection = [];
     this.results = [];
@@ -45,8 +47,6 @@ export class ItemSearchComponent implements OnInit {
       tap((list) => {
         if (list && list.id !== 'null') {
           // id always gets populated because of idField from above
-          console.log('TEST TEST');
-          console.log(list);
           this.list = list;
           this.newCollection = list.collection;
           this.collectionTitle = new FormControl(
@@ -93,7 +93,7 @@ export class ItemSearchComponent implements OnInit {
   }
 
   // this will upload to firebase
-  saveCollection() {
+  async saveCollection() {
     if (this.listDoc && this.list) {
       this.listDoc.update({
         title: this.collectionTitle.value,
@@ -104,12 +104,18 @@ export class ItemSearchComponent implements OnInit {
     } else {
       const newList: List = {
         title: this.collectionTitle.value,
-        users: [{ uid: '1', displayName: 'tmp', photoURL: '', email: '' }],
+        users: [],
         collection: this.newCollection,
         creationDate: new Date(),
         updateDate: new Date(),
         visibility: '',
       };
+      // add the current user
+      const currentUser: User | undefined = await this.user.getCurrentUser();
+      if (currentUser) {
+        newList.users = [currentUser];
+      }
+
       this.store
         .collection('list')
         .add(newList)

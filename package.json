@@ -34,7 +34,7 @@
     "express": "^4.15.2",
     "firebase": "^8.2.7",
     "ngx-auth-firebaseui": "^5.0.1",
-    "rxjs": "~6.6.0",
+    "rxjs": "^6.6.6",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

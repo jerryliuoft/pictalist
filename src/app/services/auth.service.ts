@@ -3,7 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first, tap } from 'rxjs/operators';
+import { isRegExp } from 'util';
 
 import { User } from '../types';
 @Injectable({
@@ -11,6 +12,7 @@ import { User } from '../types';
 })
 export class AuthService {
   user$: Observable<User | undefined>;
+  user: User | undefined;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.user$ = this.afAuth.authState.pipe(
@@ -20,7 +22,16 @@ export class AuthService {
         } else {
           return of(undefined);
         }
+      }),
+      tap((user: User | undefined) => {
+        if (user) {
+          this.user = user;
+        }
       })
     );
+  }
+
+  getCurrentUser() {
+    return this.user;
   }
 }
