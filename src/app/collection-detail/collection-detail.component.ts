@@ -17,7 +17,7 @@ export class CollectionDetailComponent implements OnInit {
     this.list$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         store
-          .doc<List>('list/' + params.get('id'))
+          .doc<List>('lists/' + params.get('id'))
           .valueChanges({ idField: 'id' })
       )
     );

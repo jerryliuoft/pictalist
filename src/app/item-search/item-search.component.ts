@@ -41,7 +41,7 @@ export class ItemSearchComponent implements OnInit {
     // Populate all data if this is editing an existing list
     this.list$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.listDoc = store.doc<List>('list/' + params.get('id'));
+        this.listDoc = store.doc<List>('lists/' + params.get('id'));
         return this.listDoc.valueChanges({ idField: 'id' });
       }),
       tap((list) => {
@@ -117,7 +117,7 @@ export class ItemSearchComponent implements OnInit {
       }
 
       this.store
-        .collection('list')
+        .collection('lists')
         .add(newList)
         .then((docRef) => {
           this.router.navigate(['/list', docRef.id]);

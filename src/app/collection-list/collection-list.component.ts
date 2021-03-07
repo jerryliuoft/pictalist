@@ -14,7 +14,7 @@ export class CollectionListComponent implements OnInit {
 
   constructor(private store: AngularFirestore) {
     this.lists$ = store
-      .collection<List>('list')
+      .collection<List>('lists')
       .valueChanges({ idField: 'id' });
     this.store = store;
   }
