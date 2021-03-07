@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthProvider } from 'ngx-auth-firebaseui';
 
 @Component({
@@ -8,7 +9,10 @@ import { AuthProvider } from 'ngx-auth-firebaseui';
 })
 export class LoginComponent implements OnInit {
   providers = AuthProvider;
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+  success(): void {
+    this.router.navigate(['/browse']);
+  }
 }

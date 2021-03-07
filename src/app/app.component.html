@@ -19,9 +19,12 @@
     >New</a
   >
   <span class="spacer"></span>
-  <div>
-    <a class="login" mat-raised-button routerLink="/login">Login</a>
+  <div *ngIf="auth.user$ | async; else login" class="login">
+    <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
   </div>
+  <ng-template #login>
+    <a class="login" mat-raised-button routerLink="/login">Login</a>
+  </ng-template>
 </nav>
 <main [@routeAnimations]="prepareRoute(outlet)">
   <router-outlet #outlet="outlet"></router-outlet>

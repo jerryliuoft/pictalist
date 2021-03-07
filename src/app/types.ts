@@ -8,12 +8,6 @@ export interface Item {
   source: string;
 }
 
-export interface User {
-  id: string;
-  profilePicture: string;
-  name: string;
-}
-
 export interface List {
   id?: string;
   title: string;
@@ -22,4 +16,11 @@ export interface List {
   creationDate: Date;
   updateDate: Date;
   visibility: string;
+}
+
+export interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
 }

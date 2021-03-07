@@ -104,7 +104,7 @@ export class ItemSearchComponent implements OnInit {
     } else {
       const newList: List = {
         title: this.collectionTitle.value,
-        users: [{ id: '1', name: 'tmp', profilePicture: '' }],
+        users: [{ uid: '1', displayName: 'tmp', photoURL: '', email: '' }],
         collection: this.newCollection,
         creationDate: new Date(),
         updateDate: new Date(),
