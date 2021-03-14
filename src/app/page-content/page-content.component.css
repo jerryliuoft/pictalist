@@ -1,17 +1,15 @@
 .root {
-  /* height: 100vh; */
-  padding-top: 3em;
-  padding-left: 5px;
-  padding-right: 5px;
   background-color: white;
-  border-radius: 1em;
-  /* overflow-y: scroll; */
-  width: auto;
-  min-height: 90vh;
+  border-top-left-radius: 1.5em;
+  border-top-right-radius: 1.5em;
+  /* this min height needs to find a better way currently it doesn't take header into consideration */
+  min-height: 100vh;
 }
 .content {
+  padding-top: 3em;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-bottom: 3em;
   max-width: 50em;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  width: 100%;
 }
