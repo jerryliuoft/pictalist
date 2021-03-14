@@ -10,7 +10,9 @@
       [routerLink]="['/list', list.id]"
     >
       <mat-card-header fxFlex="">
-        <mat-card-subtitle>username</mat-card-subtitle>
+        <mat-card-subtitle>{{
+          list.users[0].displayName || "Anonymous"
+        }}</mat-card-subtitle>
         <mat-card-title>{{ list.title }}</mat-card-title>
       </mat-card-header>
       <img
