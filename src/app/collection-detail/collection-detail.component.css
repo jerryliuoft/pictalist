@@ -4,3 +4,8 @@
   width: auto;
   height: auto;
 }
+
+.edit-button {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,7 +1,10 @@
 <app-page-content *ngIf="list$ | async as list">
   <h1>{{ list.title }}</h1>
 
-  <div class="edit-button">
+  <div
+    *ngIf="list.users[0].uid === this.user.getCurrentUser()?.uid"
+    class="edit-button"
+  >
     <button mat-raised-button color="primary" [routerLink]="['/edit', list.id]">
       Edit
     </button>

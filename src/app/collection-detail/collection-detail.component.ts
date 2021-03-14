@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 import { List } from '../types';
 
 @Component({
@@ -13,7 +14,11 @@ import { List } from '../types';
 export class CollectionDetailComponent implements OnInit {
   public list$: Observable<List | undefined>;
 
-  constructor(private route: ActivatedRoute, private store: AngularFirestore) {
+  constructor(
+    private route: ActivatedRoute,
+    store: AngularFirestore,
+    public user: AuthService
+  ) {
     this.list$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         store
