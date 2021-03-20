@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const cheerio = require("cheerio");
-// const cors = require("cors")({ origin: true });
+//TODO remove cors because the host name should be same for cloud function and my website
+const cors = require("cors")({ origin: true });
 const axios = require("axios");
 
 const isValidHttpUrl = (string) => {
@@ -42,7 +43,10 @@ const scrapMetatags = async (searchString) => {
   }
 };
 
-exports.scraper = functions.https.onRequest(async (request, response) => {
-  const data = await scrapMetatags(request.query.url);
-  response.json(data);
+exports.scraper = functions.https.onRequest((request, response) => {
+  cors(request, response, async () => {
+    // your function body here - use the provided req and res from cors
+    const data = await scrapMetatags(request.query.url);
+    response.json(data);
+  });
 });

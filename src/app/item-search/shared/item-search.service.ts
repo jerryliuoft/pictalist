@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap, map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { response } from 'express';
-import {Item} from '../../types'
+import { Item } from '../../types';
 import { Observable } from 'rxjs';
+import { UrlInfo } from '../../types';
 
 const WIKIPEDIA = {
   // Documentation is here https://www.mediawiki.org/wiki/API:Search#API_documentation
@@ -36,8 +37,41 @@ export class ItemSearchService {
   readonly URL = 'https://jsonplaceholder.typicode.com/todos';
   constructor(private http: HttpClient) {}
 
-  getItems() {
-    return this.http.get(this.URL);
+  isValidHttpUrl(searchVal: string) {
+    let url;
+    try {
+      url = new URL(searchVal);
+    } catch (_) {
+      return false;
+    }
+    return true;
+  }
+
+  getItems(val: string): Observable<Item[]> {
+    if (this.isValidHttpUrl(val)) {
+      return this.http
+        .get(
+          'https://us-central1-pictalist.cloudfunctions.net/scraper?url=' + val
+        )
+        .pipe(
+          map((response: any) => {
+            console.log(response);
+            const urlInfo: UrlInfo = response;
+            const card: Item = {
+              id: 1,
+              name: urlInfo.name,
+              thumbnailImage: urlInfo.image || urlInfo.favicon || '',
+              highResImage: urlInfo.image || urlInfo.favicon,
+              description: urlInfo.description || '',
+              url: urlInfo.url,
+              source: 'link',
+            };
+            return [card];
+          })
+        );
+    } else {
+      return this.getWikipedia(val);
+    }
   }
 
   getWikipedia(val: string): Observable<Item[]> {
@@ -59,7 +93,9 @@ export class ItemSearchService {
           source: 'wikipedia',
         }));
 
-        return cards.filter((card: any) => card.thumbnailImage || card.highResImage)
+        return cards.filter(
+          (card: any) => card.thumbnailImage || card.highResImage
+        );
       })
     );
   }

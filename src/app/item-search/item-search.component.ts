@@ -77,7 +77,7 @@ export class ItemSearchComponent implements OnInit {
     } else {
       this.searching$.next(true);
       this.searchResult = this.itemSearchService
-        .getWikipedia(this.searchValue.value)
+        .getItems(this.searchValue.value)
         .pipe(
           tap((result) => {
             this.results = result;

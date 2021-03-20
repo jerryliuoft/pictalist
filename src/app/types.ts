@@ -24,3 +24,12 @@ export interface User {
   photoURL?: string;
   displayName?: string;
 }
+
+export interface UrlInfo {
+  url: string;
+  name: string;
+  favicon?: string;
+  description?: string;
+  image?: string;
+  author?: string;
+}
