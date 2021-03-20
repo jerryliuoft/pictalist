@@ -1,11 +1,17 @@
 .thumbnail {
+  max-width: 100%;
+  max-height: 100%;
+}
+.thumbnailLink {
   max-width: 200px;
   max-height: 200px;
-  width: auto;
-  height: auto;
   margin: 5px;
+  min-width: 6em;
 }
-
+.itemName {
+  color: black;
+  text-decoration: none;
+}
 .edit-button {
   display: flex;
   justify-content: flex-end;

@@ -22,9 +22,15 @@
       fxLayout.xs="row"
       fxFlex="25%"
     >
-      <img class="thumbnail" src="{{ item.thumbnailImage }}" />
+      <a href="{{ item.url }}" target="_blank" class="thumbnailLink">
+        <img class="thumbnail" src="{{ item.thumbnailImage }}" />
+      </a>
       <div>
-        <h3>{{ item.name }}</h3>
+        <h3>
+          <a href="{{ item.url }}" target="_blank" class="itemName">
+            {{ item.name }}
+          </a>
+        </h3>
         <p>{{ item.description }}</p>
       </div>
     </div>
