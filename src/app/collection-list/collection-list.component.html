@@ -1,9 +1,5 @@
 <app-page-content>
-  <div
-    *ngIf="lists$ | async; let lists; else: loading"
-    fxLayout="column"
-    fxLayoutGap="1em"
-  >
+  <div *ngIf="lists.length; else loading" fxLayout="column" fxLayoutGap="1em">
     <mat-card
       *ngFor="let list of lists"
       fxLayout="row"
@@ -24,6 +20,8 @@
     <div *ngIf="lists.length === 0">
       LIST EMPTY, either database got wiped or filter got changed
     </div>
+    <button *ngIf="!listDone" mat-button (click)="loadMore()">More</button>
+    <div class="end" *ngIf="listDone">End of the list <3</div>
   </div>
   <ng-template #loading>Loading&hellip;</ng-template>
 </app-page-content>
