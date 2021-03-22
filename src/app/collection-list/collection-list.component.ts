@@ -26,7 +26,10 @@ export class CollectionListComponent implements OnInit {
       .snapshotChanges()
       .subscribe((response) => {
         for (let item of response) {
-          this.lists.push(item.payload.doc.data());
+          this.lists.push({
+            ...item.payload.doc.data(),
+            id: item.payload.doc.id,
+          });
         }
         this._lastDoc = response[response.length - 1].payload.doc;
       });
@@ -47,7 +50,10 @@ export class CollectionListComponent implements OnInit {
           return;
         }
         for (let item of response) {
-          this.lists.push(item.payload.doc.data());
+          this.lists.push({
+            ...item.payload.doc.data(),
+            id: item.payload.doc.id,
+          });
         }
         this._lastDoc = response[response.length - 1].payload.doc;
       });
