@@ -9,12 +9,11 @@ import {
 } from '@angular/animations';
 // STOLE THIS FROM https://fireship.io/lessons/angular-router-animations/
 export const slider = trigger('routeAnimations', [
-  transition('isRight => isLeft', slideTo('left')),
-  transition('isLeft => isRight', slideTo('right')),
-  transition('* => isLeft', slideTo('left')),
-  transition('* => isRight', slideTo('left')),
-  transition('isRight => *', slideTo('right')),
-  transition('isLeft => *', slideTo('right')),
+  transition('new => browse', slideTo('left')),
+  transition('* => new', slideTo('right')),
+  transition('* => login', slideTo('right')),
+  transition('* => list', slideTo('right')),
+  transition('login => browse', slideTo('left')),
 ]);
 
 function slideTo(direction: string) {

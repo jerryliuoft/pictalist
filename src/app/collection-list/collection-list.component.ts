@@ -4,8 +4,9 @@ import {
   AngularFirestore,
   QueryDocumentSnapshot,
 } from '@angular/fire/firestore';
+import { take } from 'rxjs/operators';
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 8;
 const SORT_KEY = 'updateDate';
 
 @Component({
@@ -19,11 +20,13 @@ export class CollectionListComponent implements OnInit {
   private _lastDoc!: QueryDocumentSnapshot<List>; // save the last item in list so we can fetch more
 
   constructor(private store: AngularFirestore) {
+    this.store = store;
     store
       .collection<List>('lists', (ref) =>
-        ref.limit(PAGE_SIZE).orderBy(SORT_KEY)
+        ref.limit(PAGE_SIZE).orderBy(SORT_KEY, 'desc')
       )
       .snapshotChanges()
+      .pipe(take(1))
       .subscribe((response) => {
         for (let item of response) {
           this.lists.push({
@@ -33,7 +36,6 @@ export class CollectionListComponent implements OnInit {
         }
         this._lastDoc = response[response.length - 1].payload.doc;
       });
-    this.store = store;
   }
 
   ngOnInit(): void {}
@@ -41,9 +43,10 @@ export class CollectionListComponent implements OnInit {
   loadMore() {
     this.store
       .collection<List>('lists', (ref) =>
-        ref.limit(PAGE_SIZE).orderBy(SORT_KEY).startAfter(this._lastDoc)
+        ref.limit(PAGE_SIZE).orderBy(SORT_KEY, 'desc').startAfter(this._lastDoc)
       )
       .snapshotChanges()
+      .pipe(take(1))
       .subscribe((response) => {
         if (!response.length) {
           this.listDone = true;

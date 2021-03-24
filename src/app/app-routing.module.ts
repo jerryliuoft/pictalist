@@ -14,12 +14,12 @@ const routes: Routes = [
   {
     path: 'browse',
     component: CollectionListComponent,
-    data: { animation: 'isLeft' },
+    data: { animation: 'browse' },
   },
   {
     path: 'list/:id',
     component: CollectionDetailComponent,
-    data: { animation: 'isRight' },
+    data: { animation: 'list' },
   },
   {
     path: 'edit/:id',
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'new',
     component: ItemSearchComponent,
-    data: { animation: 'isRight' },
+    data: { animation: 'new' },
     canActivate: [AuthGuard],
   },
 ];

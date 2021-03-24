@@ -55,13 +55,12 @@ export class ItemSearchService {
         )
         .pipe(
           map((response: any) => {
-            console.log(response);
             const urlInfo: UrlInfo = response;
             const card: Item = {
               id: 1,
               name: urlInfo.name,
               thumbnailImage: urlInfo.image || urlInfo.favicon || '',
-              highResImage: urlInfo.image || urlInfo.favicon,
+              highResImage: urlInfo.image || urlInfo.favicon || '',
               description: urlInfo.description || '',
               url: urlInfo.url,
               source: 'link',
