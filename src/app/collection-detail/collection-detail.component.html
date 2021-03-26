@@ -9,29 +9,28 @@
       Edit
     </button>
   </div>
-  <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutGap="2em grid"
-    fxLayoutGap.xs="1em"
-    class="grid-container"
-  >
+  <div fxLayout="column">
     <div
       *ngFor="let item of list.collection; let rank = index"
-      fxLayout="column"
-      fxLayout.xs="row"
-      fxFlex="25%"
+      fxLayout="row"
+      class="card"
     >
       <a href="{{ item.url }}" target="_blank" class="thumbnailLink">
         <img class="thumbnail" src="{{ item.thumbnailImage }}" />
       </a>
-      <div>
-        <h3>
-          <a href="{{ item.url }}" target="_blank" class="itemName">
-            <b>{{ rank + 1 }}</b> {{ item.name }}
-          </a>
-        </h3>
-        <p [style.color]="'gray'">{{ item.description }}</p>
+      <div class="divider">
+        <div class="item-text">
+          <p class="item-title">
+            <a href="{{ item.url }}" target="_blank" class="itemName"
+              >{{ item.name }}
+            </a>
+          </p>
+          <p class="item-secondary-text">{{ item.description }}</p>
+        </div>
+        <div fxFlex="1 1 auto"></div>
+        <h2 class="item-rank">
+          {{ rank >= 9 ? rank + 1 : "0" + (rank + 1) }}
+        </h2>
       </div>
     </div>
   </div>

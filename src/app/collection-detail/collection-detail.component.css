@@ -5,8 +5,8 @@
 .thumbnailLink {
   max-width: 200px;
   max-height: 200px;
-  margin: 5px;
-  min-width: 6em;
+  margin-left: 0;
+  margin-right: 16px;
 }
 .itemName {
   color: black;
@@ -15,4 +15,39 @@
 .edit-button {
   display: flex;
   justify-content: flex-end;
+}
+.card {
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 16px;
+  overflow: hidden;
+  margin-bottom: 2em;
+}
+.item-text {
+  min-width: 15em;
+  display: block;
+}
+.item-title {
+  margin-top: 0;
+  display: block;
+  font-size: larger;
+}
+.item-secondary-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.0178571429em;
+  color: gray;
+}
+.item-rank {
+  color: gray;
+  margin-left: 1em;
+}
+.divider {
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  border-bottom-width: 1px;
+  padding-bottom: 1em;
+  width: 100%;
 }
