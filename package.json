@@ -12,7 +12,7 @@
     "serve:ssr": "node dist/pictalist/server/main.js",
     "build:ssr": "ng build --prod && ng run pictalist:server:production",
     "prerender": "ng run pictalist:prerender",
-    "deploy": "gcloud app deploy"
+    "deploy": "gcloud app deploy --version=prod"
   },
   "private": true,
   "dependencies": {
