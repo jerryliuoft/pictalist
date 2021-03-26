@@ -1,4 +1,4 @@
-<app-page-content *ngIf="list$ | async as list">
+<app-page-content *ngIf="list$ | async as list" maxWidth="80em">
   <h1>{{ list.title }}</h1>
 
   <div
@@ -17,7 +17,7 @@
     class="grid-container"
   >
     <div
-      *ngFor="let item of list.collection"
+      *ngFor="let item of list.collection; let rank = index"
       fxLayout="column"
       fxLayout.xs="row"
       fxFlex="25%"
@@ -28,7 +28,8 @@
       <div>
         <h3>
           <a href="{{ item.url }}" target="_blank" class="itemName">
-            {{ item.name }}
+            <b>{{ rank + 1 }}</b
+            >-{{ item.name }}
           </a>
         </h3>
         <p>{{ item.description }}</p>
