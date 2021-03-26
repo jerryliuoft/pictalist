@@ -56,7 +56,12 @@
       </div>
     </div>
     <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of newCollection" cdkDrag>
+      <div
+        class="example-box"
+        *ngFor="let item of newCollection; let rank = index"
+        cdkDrag
+      >
+        <b [style.margin]="'0.2em'">{{ rank + 1 }}</b>
         <img src="{{ item.thumbnailImage }}" [style]="'margin-left: 0.5em'" />
         <div
           class="item-content"

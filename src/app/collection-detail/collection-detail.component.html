@@ -28,11 +28,10 @@
       <div>
         <h3>
           <a href="{{ item.url }}" target="_blank" class="itemName">
-            <b>{{ rank + 1 }}</b
-            >-{{ item.name }}
+            <b>{{ rank + 1 }}</b> {{ item.name }}
           </a>
         </h3>
-        <p>{{ item.description }}</p>
+        <p [style.color]="'gray'">{{ item.description }}</p>
       </div>
     </div>
   </div>
