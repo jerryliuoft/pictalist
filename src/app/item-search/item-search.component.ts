@@ -12,6 +12,9 @@ import {
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
+interface Collection extends Item {
+  selected: FormControl;
+}
 @Component({
   selector: 'app-item-search',
   templateUrl: './item-search.component.html',
@@ -23,7 +26,7 @@ export class ItemSearchComponent implements OnInit {
 
   searchResult: Observable<Item[]> | undefined;
   results: Item[]; // This contains searchResult retrieved value.
-  newCollection: Item[];
+  newCollection: Collection[];
   list$: Observable<List | undefined>;
   list: List | undefined;
   private listDoc: AngularFirestoreDocument<List> | undefined;
@@ -49,7 +52,9 @@ export class ItemSearchComponent implements OnInit {
         if (list && list.id !== 'null') {
           // id always gets populated because of idField from above
           this.list = list;
-          this.newCollection = list.collection;
+          this.newCollection = list.collection.map(
+            this.convertItemToCollection
+          );
           this.collectionTitle = new FormControl(
             list.title,
             Validators.required
@@ -96,15 +101,25 @@ export class ItemSearchComponent implements OnInit {
   }
 
   addToCollection(item: Item) {
-    this.newCollection.push(item);
+    this.newCollection.push(this.convertItemToCollection(item));
     // reset search
     this.searchResult = undefined;
     this.searchValue.reset();
     this.results = [];
   }
 
-  removeFromCollection(item: Item) {
-    this.newCollection = this.newCollection.filter((cur) => cur !== item);
+  removeFromCollection() {
+    this.newCollection = this.newCollection.filter(
+      (cur) => !cur.selected.value
+    );
+  }
+
+  private convertItemToCollection(item: Item) {
+    return { ...item, selected: new FormControl(false) };
+  }
+
+  hasSelection(): boolean {
+    return !!this.newCollection.find((col) => col.selected.value);
   }
 
   // this will upload to firebase

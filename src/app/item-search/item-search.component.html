@@ -55,26 +55,29 @@
         </button>
       </div>
     </div>
+    <div>
+      <div fxFlex="1 1 auto"></div>
+      <button
+        mat-raised-button
+        [disabled]="!hasSelection()"
+        color="warn"
+        (click)="removeFromCollection()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
     <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
       <div
         class="example-box"
         *ngFor="let item of newCollection; let rank = index"
         cdkDrag
       >
-        <mat-checkbox class="item-checkbox">{{ rank + 1 }}</mat-checkbox>
+        <mat-checkbox [formControl]="item.selected" class="item-checkbox">{{
+          rank + 1
+        }}</mat-checkbox>
         <img src="{{ item.thumbnailImage }}" />
         <p class="item-content">{{ item.name }}</p>
         <div fxFlex="1 1 auto"></div>
-        <!-- <div class="item-content" ]>
-          <p>{{ item.name }}</p>
-          <button
-            mat-mini-fab
-            color="warn"
-            (click)="removeFromCollection(item)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div> -->
         <div cdkDragHandle class="drag-handle">
           <mat-icon>drag_handle</mat-icon>
         </div>
