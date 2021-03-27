@@ -63,12 +63,9 @@
       >
         <b [style.margin]="'0.2em'">{{ rank + 1 }}</b>
         <img src="{{ item.thumbnailImage }}" [style]="'margin-left: 0.5em'" />
-        <div
-          class="item-content"
-          fxFlex="grow"
-          fxLayout="row"
-          fxLayoutAlign="space-between"
-        >
+        <p class="item-content">{{ item.name }}</p>
+        <div fxFlex="1 1 auto"></div>
+        <!-- <div class="item-content" ]>
           <p>{{ item.name }}</p>
           <button
             mat-mini-fab
@@ -77,6 +74,9 @@
           >
             <mat-icon>delete</mat-icon>
           </button>
+        </div> -->
+        <div cdkDragHandle class="drag-handle">
+          <mat-icon>drag_handle</mat-icon>
         </div>
       </div>
     </div>
