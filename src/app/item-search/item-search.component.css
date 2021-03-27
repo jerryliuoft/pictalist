@@ -73,6 +73,11 @@ img {
 .item-content {
   margin-left: 2em;
   margin-right: 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 .cdk-drag-preview {
   box-sizing: border-box;
@@ -104,4 +109,11 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+.item-checkbox {
+  font-size: larger;
+  font-weight: bold;
+  color: gray;
+  margin-left: 1em;
+  margin-right: 1em;
 }

@@ -39,6 +39,12 @@
   font-weight: 400;
   letter-spacing: 0.0178571429em;
   color: gray;
+  /* below is how to have multiline shorten text */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 .item-rank {
   color: gray;

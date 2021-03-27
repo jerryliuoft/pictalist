@@ -61,8 +61,8 @@
         *ngFor="let item of newCollection; let rank = index"
         cdkDrag
       >
-        <b [style.margin]="'0.2em'">{{ rank + 1 }}</b>
-        <img src="{{ item.thumbnailImage }}" [style]="'margin-left: 0.5em'" />
+        <mat-checkbox class="item-checkbox">{{ rank + 1 }}</mat-checkbox>
+        <img src="{{ item.thumbnailImage }}" />
         <p class="item-content">{{ item.name }}</p>
         <div fxFlex="1 1 auto"></div>
         <!-- <div class="item-content" ]>
