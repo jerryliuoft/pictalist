@@ -101,7 +101,7 @@ export class ItemSearchComponent implements OnInit {
   }
 
   addToCollection(item: Item) {
-    this.newCollection.push(this.convertItemToCollection(item));
+    this.newCollection.unshift(this.convertItemToCollection(item));
     // reset search
     this.searchResult = undefined;
     this.searchValue.reset();
