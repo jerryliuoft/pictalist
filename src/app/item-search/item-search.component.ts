@@ -118,16 +118,26 @@ export class ItemSearchComponent implements OnInit {
     return { ...item, selected: new FormControl(false) };
   }
 
+  private convertCollectionToItem(collection: Collection) {
+    const { selected, ...item } = collection;
+    return item;
+  }
+
   hasSelection(): boolean {
     return !!this.newCollection.find((col) => col.selected.value);
   }
 
   // this will upload to firebase
   async saveCollection() {
+    // need to remove the meta data from the collections
+    const collection = this.newCollection.map((col) =>
+      this.convertCollectionToItem(col)
+    );
+
     if (this.listDoc && this.list) {
       this.listDoc.update({
         title: this.collectionTitle.value,
-        collection: this.newCollection,
+        collection,
         updateDate: new Date(),
       });
       this.router.navigate(['/list', this.list.id]);
@@ -135,7 +145,7 @@ export class ItemSearchComponent implements OnInit {
       const newList: List = {
         title: this.collectionTitle.value,
         users: [],
-        collection: this.newCollection,
+        collection,
         creationDate: new Date(),
         updateDate: new Date(),
         visibility: '',
