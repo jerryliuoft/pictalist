@@ -55,6 +55,9 @@ export class ItemSearchService {
         )
         .pipe(
           map((response: any) => {
+            if (response.code === 'ENOTFOUND') {
+              return [];
+            }
             const urlInfo: UrlInfo = response;
             const card: Item = {
               id: 1,
@@ -91,10 +94,13 @@ export class ItemSearchService {
           url: result.fullurl,
           source: 'wikipedia',
         }));
-
-        return cards.filter(
-          (card: any) => card.thumbnailImage || card.highResImage
-        );
+        if (cards) {
+          return cards.filter(
+            (card: any) => card.thumbnailImage || card.highResImage
+          );
+        } else {
+          return [];
+        }
       })
     );
   }

@@ -31,6 +31,7 @@ export class ItemSearchComponent implements OnInit {
   list: List | undefined;
   private listDoc: AngularFirestoreDocument<List> | undefined;
   searching$: BehaviorSubject<any>; // used to diaply the loading bar
+  noSearchResult$: BehaviorSubject<any>; // used to diaply the loading bar
 
   constructor(
     private itemSearchService: ItemSearchService,
@@ -40,6 +41,8 @@ export class ItemSearchComponent implements OnInit {
     private user: AuthService
   ) {
     this.searching$ = new BehaviorSubject(false);
+    this.noSearchResult$ = new BehaviorSubject(false);
+
     this.newCollection = [];
     this.results = [];
     // Populate all data if this is editing an existing list
@@ -81,10 +84,14 @@ export class ItemSearchComponent implements OnInit {
       this.addToCollection(this.results[0]);
     } else {
       this.searching$.next(true);
+      this.noSearchResult$.next(false);
       this.searchResult = this.itemSearchService
         .getItems(this.searchValue.value)
         .pipe(
           tap((result) => {
+            if (result.length === 0) {
+              this.noSearchResult$.next(true);
+            }
             this.results = result;
             this.searching$.next(false);
           })

@@ -46,6 +46,9 @@
           class="loadingBar"
         ></mat-progress-bar>
       </div>
+      <div *ngIf="noSearchResult$ | async" fxLayoutAlign="space-evenly">
+        No results found
+      </div>
       <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1em grid">
         <div
           *ngFor="let result of searchResult | async"
