@@ -58,8 +58,22 @@
         </div>
       </div>
     </diV>
-    <div>
+    <div class="action-bar">
       <div fxFlex="1 1 auto"></div>
+      <button
+        mat-raised-button
+        [disabled]="!hasSelection()"
+        (click)="moveToTop()"
+      >
+        <mat-icon>vertical_align_top</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        [disabled]="!hasSelection()"
+        (click)="moveToBottom()"
+      >
+        <mat-icon>vertical_align_bottom</mat-icon>
+      </button>
       <button
         mat-raised-button
         [disabled]="!hasSelection()"

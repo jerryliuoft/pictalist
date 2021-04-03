@@ -113,6 +113,23 @@ export class ItemSearchComponent implements OnInit {
       (cur) => !cur.selected.value
     );
   }
+  moveToTop() {
+    const selected = this.newCollection.filter((cur) => cur.selected.value);
+    const notSelected = this.newCollection.filter((cur) => !cur.selected.value);
+
+    this.newCollection = [...selected, ...notSelected];
+    // remove the selection
+    this.newCollection.map((col) => col.selected.reset());
+  }
+
+  moveToBottom() {
+    const selected = this.newCollection.filter((cur) => cur.selected.value);
+    const notSelected = this.newCollection.filter((cur) => !cur.selected.value);
+
+    this.newCollection = [...notSelected, ...selected];
+    // remove the selection
+    this.newCollection.map((col) => col.selected.reset());
+  }
 
   private convertItemToCollection(item: Item) {
     return { ...item, selected: new FormControl(false) };

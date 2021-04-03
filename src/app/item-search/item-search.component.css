@@ -1,6 +1,14 @@
 .search-bar {
   width: 100%;
 }
+.action-bar > button {
+  margin-left: 1em;
+}
+.action-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
 
 .card {
   width: 10em;
