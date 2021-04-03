@@ -11,7 +11,7 @@ export interface Item {
 export interface List {
   id?: string;
   title: string;
-  users: User[];
+  user: User;
   collection: Item[];
   creationDate: Date;
   updateDate: Date;

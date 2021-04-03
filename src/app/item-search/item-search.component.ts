@@ -159,19 +159,15 @@ export class ItemSearchComponent implements OnInit {
       });
       this.router.navigate(['/list', this.list.id]);
     } else {
+      const currentUser: User = await this.user.getCurrentUser();
       const newList: List = {
         title: this.collectionTitle.value,
-        users: [],
+        user: currentUser,
         collection,
         creationDate: new Date(),
         updateDate: new Date(),
         visibility: '',
       };
-      // add the current user
-      const currentUser: User | undefined = await this.user.getCurrentUser();
-      if (currentUser) {
-        newList.users = [currentUser];
-      }
 
       this.store
         .collection('lists')

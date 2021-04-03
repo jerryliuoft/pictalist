@@ -1,0 +1,14 @@
+mat-card {
+  height: 10em;
+  max-width: 50em;
+}
+img[mat-card-image] {
+  height: 7em;
+  width: auto;
+  margin-right: 0.5em;
+  margin-top: 0.5em;
+}
+.end{
+  align-self: center;
+  color: gray;
+}

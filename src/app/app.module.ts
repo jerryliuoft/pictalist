@@ -6,6 +6,7 @@ import { ItemSearchComponent } from './item-search/item-search.component';
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './login/login.component';
 import { CollectionListComponent } from './collection-list/collection-list.component';
+import { CollectionListProfileComponent } from './collection-list-profile/collection-list-profile.component';
 import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
 import { PageContentComponent } from './page-content/page-content.component';
 
@@ -15,6 +16,7 @@ import { PageContentComponent } from './page-content/page-content.component';
     ItemSearchComponent,
     LoginComponent,
     CollectionListComponent,
+    CollectionListProfileComponent,
     CollectionDetailComponent,
     PageContentComponent,
   ],

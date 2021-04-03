@@ -12,7 +12,7 @@ import { User } from '../types';
 })
 export class AuthService {
   user$: Observable<User | undefined>;
-  user: User | undefined;
+  user!: User;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.user$ = this.afAuth.authState.pipe(

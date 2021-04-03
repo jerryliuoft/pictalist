@@ -5,24 +5,31 @@ import {
   QueryDocumentSnapshot,
 } from '@angular/fire/firestore';
 import { take } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 const PAGE_SIZE = 8;
 const SORT_KEY = 'updateDate';
 
 @Component({
-  selector: 'app-collection-list',
-  templateUrl: './collection-list.component.html',
-  styleUrls: ['./collection-list.component.css'],
+  selector: 'app-collection-list-profile',
+  templateUrl: './collection-list-profile.component.html',
+  styleUrls: ['./collection-list-profile.component.css'],
 })
-export class CollectionListComponent implements OnInit {
+/// THIS IS A COPY OF COLLECTION_LIST IF I"M NOT LAZY I"LL REFACTOR BUT I"M ALWAYS LAZY
+export class CollectionListProfileComponent implements OnInit {
   public lists: List[] = [];
   public listDone = false;
   private _lastDoc!: QueryDocumentSnapshot<List>; // save the last item in list so we can fetch more
 
-  constructor(private store: AngularFirestore) {
-    store
+  constructor(private store: AngularFirestore, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.store
       .collection<List>('lists', (ref) =>
-        ref.limit(PAGE_SIZE).orderBy(SORT_KEY, 'desc')
+        ref
+          .limit(PAGE_SIZE)
+          .orderBy(SORT_KEY, 'desc')
+          .where('user.uid', '==', this.route.snapshot.paramMap.get('id'))
       )
       .snapshotChanges()
       .pipe(take(2)) // TODO this is some fucking joke angularFire + SSR broken af. Once this is fixed we can go back to use first
@@ -39,12 +46,14 @@ export class CollectionListComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
-
   loadMore() {
     this.store
       .collection<List>('lists', (ref) =>
-        ref.limit(PAGE_SIZE).orderBy(SORT_KEY, 'desc').startAfter(this._lastDoc)
+        ref
+          .limit(PAGE_SIZE)
+          .orderBy(SORT_KEY, 'desc')
+          .where('user.uid', '==', this.route.snapshot.paramMap.get('id'))
+          .startAfter(this._lastDoc)
       )
       .snapshotChanges()
       .pipe(take(2))

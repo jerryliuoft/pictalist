@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollectionListComponent } from './collection-list/collection-list.component';
 import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
 import { AuthGuard } from './services/auth.guard';
+import { CollectionListProfileComponent } from './collection-list-profile/collection-list-profile.component';
 
 // Animation use isLeft for swiping to left and right for the other way
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: ItemSearchComponent,
+  },
+  {
+    path: 'user/:id',
+    component: CollectionListProfileComponent,
   },
   {
     path: 'new',

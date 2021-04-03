@@ -2,7 +2,7 @@
   <h1>{{ list.title }}</h1>
 
   <div
-    *ngIf="list.users[0].uid === this.user.getCurrentUser()?.uid"
+    *ngIf="list.user.uid === this.user.getCurrentUser()?.uid"
     class="edit-button"
   >
     <button mat-raised-button color="primary" [routerLink]="['/edit', list.id]">

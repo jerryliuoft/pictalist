@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { slider } from './route-animations';
 import { AuthService } from './services/auth.service';
-
+import { LinkMenuItem } from 'ngx-auth-firebaseui';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +10,17 @@ import { AuthService } from './services/auth.service';
   animations: [slider],
 })
 export class AppComponent {
-  constructor(public auth: AuthService) {}
+  links: LinkMenuItem[] = [];
+
+  constructor(public auth: AuthService, private router: Router) {
+    this.links = [
+      { icon: 'favorite', text: 'My lists', callback: this.goToProfile },
+    ];
+  }
+
+  goToProfile = () => {
+    this.router.navigate(['/user/' + this.auth.getCurrentUser()?.uid]);
+  };
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet?.activatedRouteData?.animation;

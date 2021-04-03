@@ -20,7 +20,10 @@
   >
   <span class="spacer"></span>
   <div *ngIf="auth.user$ | async; else login" class="login">
-    <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
+    <ngx-auth-firebaseui-avatar
+      [canViewAccount]="false"
+      [links]="links"
+    ></ngx-auth-firebaseui-avatar>
   </div>
   <ng-template #login>
     <a class="login" mat-raised-button routerLink="/login">Login</a>
