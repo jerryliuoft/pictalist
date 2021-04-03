@@ -9,7 +9,11 @@ import { AuthGuard } from './services/auth.guard';
 
 // Animation use isLeft for swiping to left and right for the other way
 const routes: Routes = [
-  { path: '', redirectTo: '/browse', pathMatch: 'full' },
+  {
+    path: '',
+    component: CollectionListComponent,
+    data: { animation: 'browse' },
+  },
   { path: 'login', component: LoginComponent },
   {
     path: 'browse',
