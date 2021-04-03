@@ -1,60 +1,63 @@
 <app-page-content>
   <div *ngIf="list$ | async"></div>
-  <div fxLayoutAlign="space-evenly">
-    <div class="search-bar">
+  <div class="actions">
+    <div class="title-input">
       <mat-form-field appearance="outline" fxFlexFill>
-        <mat-label>Type here to add </mat-label>
-        <input
-          matInput
-          placeholder="press tab or enter to search"
-          [formControl]="searchValue"
-          (keydown.enter)="search()"
-          (keydown.tab)="search()"
-        />
-        <mat-hint
-          >Try website link, anime, movie, video game name or your grocery items
-          like milk
-        </mat-hint>
+        <mat-label>Title</mat-label>
+        <input matInput [formControl]="collectionTitle" required />
       </mat-form-field>
     </div>
-  </div>
-  <!-- TODO look into if this is called twice -->
-  <div *ngIf="searching$ | async" fxLayoutAlign="space-evenly">
-    <mat-progress-bar
-      mode="indeterminate"
-      class="loadingBar"
-    ></mat-progress-bar>
-  </div>
-  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1em grid">
-    <div
-      *ngFor="let result of searchResult | async"
-      class="highlightFirstCard"
-      (click)="addToCollection(result)"
-    >
-      <mat-card fxFlex="1 0 10em" class="card">
-        <img src="{{ result.thumbnailImage }}" />
-      </mat-card>
+    <div class="save-button">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveCollection()"
+        [disabled]="collectionTitle.errors?.required"
+      >
+        Save
+      </button>
     </div>
   </div>
-  <div *ngIf="newCollection.length > 0" class="collection">
-    <div class="actions">
-      <div class="title-input">
+
+  <div *ngIf="collectionTitle.value" class="collection">
+    <div fxLayoutAlign="space-evenly">
+      <div class="search-bar">
         <mat-form-field appearance="outline" fxFlexFill>
-          <mat-label>Title</mat-label>
-          <input matInput [formControl]="collectionTitle" required />
+          <mat-label>Type here to add </mat-label>
+          <input
+            matInput
+            placeholder="press tab or enter to search"
+            [formControl]="searchValue"
+            (keydown.enter)="search()"
+            (keydown.tab)="search()"
+          />
+          <mat-hint
+            >Try website link, anime, movie, video game name or your grocery
+            items like milk
+          </mat-hint>
         </mat-form-field>
       </div>
-      <div class="save-button">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="saveCollection()"
-          [disabled]="collectionTitle.errors?.required"
-        >
-          Save
-        </button>
-      </div>
     </div>
+    <diV>
+      <!-- TODO look into if this is called twice -->
+      <div *ngIf="searching$ | async" fxLayoutAlign="space-evenly">
+        <mat-progress-bar
+          mode="indeterminate"
+          class="loadingBar"
+        ></mat-progress-bar>
+      </div>
+      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1em grid">
+        <div
+          *ngFor="let result of searchResult | async"
+          class="highlightFirstCard"
+          (click)="addToCollection(result)"
+        >
+          <mat-card fxFlex="1 0 10em" class="card">
+            <img src="{{ result.thumbnailImage }}" />
+          </mat-card>
+        </div>
+      </div>
+    </diV>
     <div>
       <div fxFlex="1 1 auto"></div>
       <button
