@@ -50,3 +50,21 @@ exports.scraper = functions.https.onRequest((request, response) => {
     response.json(data);
   });
 });
+
+exports.searcher = functions.https.onRequest((request, response) => {
+  cors(request, response, async () => {
+    const data = await axios.get('https://www.google.ca/complete/search', {params: {
+      q: request.query.search,
+      // cp: 14,
+      client: 'gws-wiz',
+      xssi: 't',
+      gs_ri: 'gws-wiz',
+      hl: 'en-CA',
+      // authuser: 0,
+      // psi: '9PppYJn5B9HysQWZ9paYCw.1617558357108',
+      // dpr: 1.5
+    }});
+    response.json(data.data);
+  });
+});
+
