@@ -42,7 +42,7 @@ export class CollectionDetailComponent implements OnInit {
           { name: 'twitter:card', content: 'summary' },
           { name: 'og:url', content: 'https://pictalist/list/' + data?.id },
           { name: 'og:title', content: title },
-          // { name: 'og:description', content: 'no Description' },
+          { name: 'og:description', content: this.list?.description || '' },
           {
             name: 'og:image',
             content: this.list?.collection[0].thumbnailImage || '',
