@@ -4,6 +4,8 @@
       *ngFor="let list of lists"
       fxLayout="row"
       [routerLink]="['/list', list.id]"
+      [style.cursor]="'pointer'"
+      [class.mat-elevation-z4]="true"
     >
       <mat-card-header fxFlex="">
         <mat-card-subtitle>{{

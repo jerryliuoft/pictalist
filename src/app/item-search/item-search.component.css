@@ -73,7 +73,6 @@ img {
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
-  cursor: move;
   background: white;
   height: 5em;
   cursor: default;
