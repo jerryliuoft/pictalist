@@ -44,7 +44,6 @@ export class ItemSearchComponent implements OnInit {
   ) {
     this.searching$ = new BehaviorSubject(false);
     this.noSearchResult$ = new BehaviorSubject(false);
-
     this.newCollection = [];
     this.results = [];
     // Populate all data if this is editing an existing list

@@ -1,6 +1,8 @@
 <app-page-content *ngIf="list" maxWidth="80em">
   <h1>{{ list.title }}</h1>
 
+  <p class="description">{{ list.description }}</p>
+
   <div
     *ngIf="list.user.uid === this.user.getCurrentUser()?.uid"
     class="edit-button"

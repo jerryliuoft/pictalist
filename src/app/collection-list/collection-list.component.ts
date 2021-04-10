@@ -22,7 +22,10 @@ export class CollectionListComponent implements OnInit {
   constructor(private store: AngularFirestore) {
     store
       .collection<List>('lists', (ref) =>
-        ref.limit(PAGE_SIZE).orderBy(SORT_KEY, 'desc')
+        ref
+          .limit(PAGE_SIZE)
+          .where('isPrivate', '==', false)
+          .orderBy(SORT_KEY, 'desc')
       )
       .snapshotChanges()
       .pipe(take(2)) // TODO this is some fucking joke angularFire + SSR broken af. Once this is fixed we can go back to use first
@@ -44,7 +47,11 @@ export class CollectionListComponent implements OnInit {
   loadMore() {
     this.store
       .collection<List>('lists', (ref) =>
-        ref.limit(PAGE_SIZE).orderBy(SORT_KEY, 'desc').startAfter(this._lastDoc)
+        ref
+          .limit(PAGE_SIZE)
+          .where('isPrivate', '==', false)
+          .orderBy(SORT_KEY, 'desc')
+          .startAfter(this._lastDoc)
       )
       .snapshotChanges()
       .pipe(take(2))

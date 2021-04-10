@@ -36,7 +36,7 @@
     <div fxLayoutAlign="space-evenly">
       <div class="search-bar">
         <mat-form-field appearance="outline" fxFlexFill>
-          <mat-label>Type here to add </mat-label>
+          <mat-label>Search</mat-label>
           <input
             matInput
             placeholder="press tab or enter to search"
@@ -62,13 +62,17 @@
       <div *ngIf="noSearchResult$ | async" fxLayoutAlign="space-evenly">
         No results found
       </div>
-      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1em grid">
+      <div fxLayout="row wrap" fxLayoutGap="1em grid">
         <div
           *ngFor="let result of searchResult | async"
           class="highlightFirstCard"
           (click)="addToCollection(result)"
         >
-          <mat-card fxFlex="1 0 10em" class="card">
+          <mat-card
+            fxFlex="1 0 10em"
+            class="card"
+            [class.mat-elevation-z3]="true"
+          >
             <img src="{{ result.thumbnailImage }}" />
           </mat-card>
         </div>

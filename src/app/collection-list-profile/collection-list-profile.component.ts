@@ -28,8 +28,8 @@ export class CollectionListProfileComponent implements OnInit {
       .collection<List>('lists', (ref) =>
         ref
           .limit(PAGE_SIZE)
-          .orderBy(SORT_KEY, 'desc')
           .where('user.uid', '==', this.route.snapshot.paramMap.get('id'))
+          .orderBy(SORT_KEY, 'desc')
       )
       .snapshotChanges()
       .pipe(take(2)) // TODO this is some fucking joke angularFire + SSR broken af. Once this is fixed we can go back to use first
@@ -51,8 +51,8 @@ export class CollectionListProfileComponent implements OnInit {
       .collection<List>('lists', (ref) =>
         ref
           .limit(PAGE_SIZE)
-          .orderBy(SORT_KEY, 'desc')
           .where('user.uid', '==', this.route.snapshot.paramMap.get('id'))
+          .orderBy(SORT_KEY, 'desc')
           .startAfter(this._lastDoc)
       )
       .snapshotChanges()

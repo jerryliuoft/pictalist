@@ -38,12 +38,11 @@ img {
 }
 
 .collection {
-  margin-top: 3em;
+  margin-top: 2em;
 }
 .actions {
   display: flex;
   margin: auto;
-  margin-bottom: 1em;
 }
 .save-button {
   margin: 0.6em;
