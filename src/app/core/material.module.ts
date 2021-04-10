@@ -10,6 +10,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -25,6 +27,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatTabsModule,
     DragDropModule,
     MatCheckboxModule,
+    MatExpansionModule,
+    MatSlideToggleModule,
   ],
 })
 export class MaterialModule {}

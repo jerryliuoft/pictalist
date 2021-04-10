@@ -52,6 +52,15 @@ img {
 .title-input {
   width: 100%;
 }
+
+.description-field {
+  width: 100%;
+}
+
+.is-private-toggle {
+  float: right;
+}
+
 /* below are all drag and drop styles */
 .example-list {
   max-width: 100%;

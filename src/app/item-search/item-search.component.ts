@@ -23,6 +23,8 @@ interface Collection extends Item {
 export class ItemSearchComponent implements OnInit {
   searchValue = new FormControl('');
   collectionTitle = new FormControl('', Validators.required);
+  description = new FormControl('');
+  isPrivate = new FormControl(false);
 
   searchResult: Observable<Item[]> | undefined;
   results: Item[]; // This contains searchResult retrieved value.
@@ -62,6 +64,8 @@ export class ItemSearchComponent implements OnInit {
             list.title,
             Validators.required
           );
+          this.description = new FormControl(list.description);
+          this.isPrivate = new FormControl(list.isPrivate);
         }
       })
     );
@@ -163,6 +167,8 @@ export class ItemSearchComponent implements OnInit {
         title: this.collectionTitle.value,
         collection,
         updateDate: new Date(),
+        isPrivate: this.isPrivate.value,
+        description: this.description.value,
       });
       this.router.navigate(['/list', this.list.id]);
     } else {
@@ -173,7 +179,8 @@ export class ItemSearchComponent implements OnInit {
         collection,
         creationDate: new Date(),
         updateDate: new Date(),
-        visibility: '',
+        isPrivate: this.isPrivate.value,
+        description: this.description.value,
       };
 
       this.store

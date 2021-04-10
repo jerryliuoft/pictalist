@@ -15,7 +15,8 @@ export interface List {
   collection: Item[];
   creationDate: Date;
   updateDate: Date;
-  visibility: string;
+  description: string;
+  isPrivate: boolean;
 }
 
 export interface User {
