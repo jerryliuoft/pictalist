@@ -7,11 +7,13 @@ import { CollectionListComponent } from './collection-list/collection-list.compo
 import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
 import { AuthGuard } from './services/auth.guard';
 import { CollectionListProfileComponent } from './collection-list-profile/collection-list-profile.component';
+import { RedirectGuard } from './services/route-redirect.guard';
 
 // Animation use isLeft for swiping to left and right for the other way
 const routes: Routes = [
   {
     path: '',
+    canActivate: [RedirectGuard],
     component: CollectionListComponent,
     data: { animation: 'browse' },
   },
